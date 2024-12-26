@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: agent
+      POSTGRES_PASSWORD: agent1234
+      POSTGRES_DB: agent
+    ports:
+      - "6432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres-network
+    restart: always
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres-network:
+    driver: bridge
