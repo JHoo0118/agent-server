@@ -1,8 +1,7 @@
 from dependency_injector.wiring import Provide, inject
-from fastapi import APIRouter, Depends, Response, Body
+from fastapi import APIRouter, Body, Depends, Response
 from fastapi.exceptions import HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
-from app.configurator.config import settings
 
 from app.application.port.inbound.auth import (
     LoginCommand,
@@ -10,10 +9,12 @@ from app.application.port.inbound.auth import (
     SignupCommand,
     SignupUseCase,
 )
-from app.configurator import Container
+from app.configurator.config import settings
+from app.configurator.containers import Container
+
+from .login_response import LoginResponse
 from .signup_request import SignupRequest
 from .signup_response import SignupResponse
-from .login_response import LoginResponse
 
 router = APIRouter(
     prefix="/auth",

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from app.application.port.inbound.ai.code_convert import CodeConvertGenerateCommand
+from .code_convert_generate_command import CodeConvertGenerateCommand
 
 
 class CodeConvertGenerateUseCase(ABC):

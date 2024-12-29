@@ -1,4 +1,5 @@
 from prisma.models import User as UserEntity
+
 from app.domain.user import User
 
 

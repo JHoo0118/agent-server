@@ -1,13 +1,14 @@
-from pydantic import Field
-
 from dataclasses import asdict, dataclass
-from app.adapter.inbound.web.base_schema import BaseSchema
-from app.configurator.config import settings
-from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
+from typing import ClassVar, Final
+
 from fastapi import status
 from fastapi.exceptions import HTTPException
-from typing import ClassVar, Final
+from jose import JWTError, jwt
+from pydantic import Field
+
+from app.adapter.inbound.web.base_schema import BaseSchema
+from app.configurator.config import settings
 
 
 @dataclass

@@ -3,7 +3,7 @@ from pydantic import EmailStr, Field
 from app.application.port.inbound.base_command import BaseCommand
 
 
-class SignupCommand(BaseCommand):
+class AlgorithmAdviceGenerateCommand(BaseCommand):
     email: EmailStr = Field()
-    password: str = Field()
-    username: str = Field()
+    lang: str = Field()
+    message: str = Field()

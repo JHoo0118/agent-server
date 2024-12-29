@@ -1,8 +1,9 @@
+from dataclasses import asdict, dataclass
+from typing import Final
+
 from pydantic import Field
 
-from dataclasses import asdict, dataclass
 from app.adapter.inbound.web.base_schema import BaseSchema
-from typing import Final
 
 
 @dataclass

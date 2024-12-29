@@ -1,7 +1,8 @@
-from dataclasses import asdict, dataclass
-from app.adapter.inbound.web.base_schema import BaseSchema
 import datetime
-from typing import Optional, Final
+from dataclasses import asdict, dataclass
+from typing import Final, Optional
+
+from app.adapter.inbound.web.base_schema import BaseSchema
 
 
 @dataclass

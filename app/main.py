@@ -4,10 +4,11 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.adapter.inbound.web import api
-from app.configurator import Container, settings
-from prisma import Prisma
 from app.adapter.inbound.middleware import JwtMiddleware
+from app.adapter.inbound.web import api
+from app.configurator.config import settings
+from app.configurator.containers import Container
+from prisma import Prisma
 
 load_dotenv()
 

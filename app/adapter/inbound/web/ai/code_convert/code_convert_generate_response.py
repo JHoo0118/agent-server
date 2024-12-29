@@ -1,5 +1,5 @@
-from pydantic import Field
 from openai import BaseModel
+from pydantic import Field
 
 
 class CodeConvertGenerateResponse(BaseModel):

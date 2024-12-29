@@ -1,5 +1,6 @@
-from .user_repository import UserRepository
 from app.application.port.outbound.user import GetUserPort
+
+from .user_repository import UserRepository
 
 
 class UserAdapter(GetUserPort):

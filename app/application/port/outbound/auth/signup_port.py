@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-
 from app.domain.user import User
 
 
@@ -9,6 +8,7 @@ class SignupPort(ABC):
     def __init__(self):
         pass
 
+    @abstractmethod
     async def signup(self, email: str, password: str, username: str) -> User:
         return self._signup(email=email, password=password, username=username)
 

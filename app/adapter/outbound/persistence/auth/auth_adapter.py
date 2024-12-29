@@ -1,15 +1,15 @@
-from app.adapter.outbound.persistence.user import UserRepository, UserMapper
-from app.adapter.outbound.persistence.refresh_token import RefreshTokenRepository
-from app.application.port.outbound.auth import LoginPort, SignupPort
 from fastapi import status
 from fastapi.exceptions import HTTPException
 from prisma.errors import UniqueViolationError
-from app.domain.user import User
 from prisma.models import User as PrismaUser
 
-from .auth_repository import AuthRepository
-
+from app.adapter.outbound.persistence.refresh_token import RefreshTokenRepository
+from app.adapter.outbound.persistence.user import UserMapper, UserRepository
+from app.application.port.outbound.auth import LoginPort, SignupPort
 from app.domain.auth import JwtToken
+from app.domain.user import User
+
+from .auth_repository import AuthRepository
 
 
 class AuthAdapter(LoginPort, SignupPort):
@@ -32,7 +32,7 @@ class AuthAdapter(LoginPort, SignupPort):
                 detail="존재하지 않는 이메일이거나 비밀번호가 틀렸습니다.",
                 headers={"WWW-Authenticate": "Bearer"},
             )
-        elif not self.auth_repository.verify_hash(password, user.password):
+        elif not await self.auth_repository.verify_hash(password, user.password):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="비밀번호가 틀렸습니다.",

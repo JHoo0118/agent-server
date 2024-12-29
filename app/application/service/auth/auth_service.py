@@ -1,8 +1,8 @@
 from fastapi.security import OAuth2PasswordBearer
+
 from app.application.port.inbound.auth import LoginCommand, SignupCommand
 from app.application.port.outbound.auth import LoginPort, SignupPort
 from app.domain.auth import JwtToken
-
 from app.domain.user import User
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/login")

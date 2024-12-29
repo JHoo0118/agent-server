@@ -1,5 +1,6 @@
-from prisma import Prisma
 from prisma.models import User
+
+from prisma import Prisma
 
 
 class UserRepository:

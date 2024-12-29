@@ -23,6 +23,7 @@ langchain = "^0.3.13"
 langchain-openai = "^0.2.14"
 langgraph = "^0.2.60"
 langsmith = "^0.2.6"
+sse-starlette = "^2.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
