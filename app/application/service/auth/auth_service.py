@@ -1,7 +1,4 @@
-# import os
-# import requests
 from fastapi.security import OAuth2PasswordBearer
-
 from app.application.port.inbound.auth import LoginCommand, SignupCommand
 from app.application.port.outbound.auth import LoginPort, SignupPort
 from app.domain.auth import JwtToken

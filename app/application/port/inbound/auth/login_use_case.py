@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from app.application.port.inbound.auth import LoginCommand
 
-# from app.domain.auth import JwtToken
+from app.domain.auth import JwtToken
 
 
 class LoginUseCase(ABC):
@@ -10,9 +10,9 @@ class LoginUseCase(ABC):
     def __init__(self):
         pass
 
-    async def login(self, command: LoginCommand):
+    async def login(self, command: LoginCommand) -> JwtToken:
         return self._login(command=command)
 
     @abstractmethod
-    async def _login(self, command: LoginCommand):
+    async def _login(self, command: LoginCommand) -> JwtToken:
         raise NotImplementedError

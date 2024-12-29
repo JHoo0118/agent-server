@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-# from app.domain.auth import JwtToken
+from app.domain.auth import JwtToken
 
 
 class LoginPort(ABC):
@@ -8,8 +8,8 @@ class LoginPort(ABC):
     def __init__(self):
         pass
 
-    async def login(self, email: str, password: str):
+    async def login(self, email: str, password: str) -> JwtToken:
         return self._login(email=email, password=password)
 
-    async def _login(self, email: str, password: str):
+    async def _login(self, email: str, password: str) -> JwtToken:
         raise NotImplementedError

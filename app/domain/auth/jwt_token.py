@@ -7,7 +7,7 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta, timezone
 from fastapi import status
 from fastapi.exceptions import HTTPException
-from typing import ClassVar
+from typing import ClassVar, Final
 
 
 @dataclass
@@ -30,13 +30,27 @@ class JwtToken(BaseSchema):
     @classmethod
     def generate_jwt_token(
         cls,
-        access_token: str,
-        refresh_token: str,
+        access_token: "JwtToken.AccessToken",
+        refresh_token: "JwtToken.RefreshToken",
     ) -> "JwtToken":
         return cls.model_construct(
-            access_token=access_token,
-            refresh_token=refresh_token,
+            access_token=access_token.access_token,
+            refresh_token=refresh_token.refresh_token,
         )
+
+    @dataclass(frozen=True)
+    class AccessToken:
+        access_token: Final[str]
+
+        def __init__(self, value: str):
+            object.__setattr__(self, "access_token", value)
+
+    @dataclass(frozen=True)
+    class RefreshToken:
+        refresh_token: Final[str]
+
+        def __init__(self, value: str):
+            object.__setattr__(self, "refresh_token", value)
 
     @staticmethod
     def create_access_token(data: dict) -> str:
@@ -72,7 +86,7 @@ class JwtToken(BaseSchema):
                 algorithms=[settings.ALGORITHM],
                 audience="authenticated",
             )
-            email: str = payload.get("email")
+            email: str = payload.get("sub")
             if email is None:
                 raise JwtToken.credentials_exception
             return email

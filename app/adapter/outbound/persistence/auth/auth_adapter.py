@@ -1,4 +1,4 @@
-from app.adapter.outbound.persistence.user import UserRepository
+from app.adapter.outbound.persistence.user import UserRepository, UserMapper
 from app.adapter.outbound.persistence.refresh_token import RefreshTokenRepository
 from app.application.port.outbound.auth import LoginPort, SignupPort
 from fastapi import status
@@ -44,7 +44,8 @@ class AuthAdapter(LoginPort, SignupPort):
         )
 
         return JwtToken.generate_jwt_token(
-            access_token=access_token, refresh_token=refresh_token
+            access_token=JwtToken.AccessToken(access_token),
+            refresh_token=JwtToken.RefreshToken(access_token),
         )
 
     async def signup(self, email: str, password: str, username: str) -> User:
@@ -54,17 +55,7 @@ class AuthAdapter(LoginPort, SignupPort):
                 email=email, hashed_password=hashed_password, username=username
             )
 
-            return User.generate_user(
-                email=user.email,
-                username=username,
-                refreshToken=user.refreshToken,
-                remain_count=user.remainCount,
-                type=user.type,
-                password=user.password,
-                disabled=user.disabled,
-                created_at=user.createdAt,
-                updated_at=user.updatedAt,
-            )
+            return UserMapper.map_to_domain(user_entity=user)
 
         except UniqueViolationError as e:
             errTarget = (
