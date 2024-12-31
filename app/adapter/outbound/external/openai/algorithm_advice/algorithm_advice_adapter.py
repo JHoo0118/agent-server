@@ -1,7 +1,7 @@
 from operator import itemgetter
 from typing import AsyncGenerator
 
-from langchain.memory import ConversationSummaryBufferMemory
+from langchain.memory.summary_buffer import ConversationSummaryBufferMemory
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.runnable import RunnableLambda, RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser

@@ -14,8 +14,6 @@ class AlgorithmAdviceGeneratePort(ABC):
         lang: str,
         message: str,
     ) -> AsyncGenerator:
-        print(f"Generating advice for email={email}, lang={lang}, message={message}")
-
         async for token in self._generate(email, lang, message):
             yield token
 
