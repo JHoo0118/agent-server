@@ -1,1 +1,3 @@
 # Agent Server
+
+## Hexagonal Architecture
